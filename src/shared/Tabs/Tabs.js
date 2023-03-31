@@ -6,7 +6,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import ThreeHours from "../../components/LocationInfo/ThreeHours";
-import Hourly from "../../components/LocationInfo/Hourly";
+
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("daily");
   const { id: paramid } = useParams();
