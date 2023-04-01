@@ -14,12 +14,12 @@ const Home = () => {
           </div>
         </div>
       </main> */}
-      <main class="flex h-screen justify-center items-center flex-col">
+      <main className="flex h-screen justify-center items-center flex-col">
         <div
-          class="w-full h-screen bg-cover bg-center"
+          className="w-full h-screen bg-cover bg-center"
           style={{ backgroundImage: `url(${bgImg})` }}
         >
-          <div class="h-screen flex justify-center items-center backdrop-brightness-50 flex-col">
+          <div className="h-screen flex justify-center items-center backdrop-brightness-50 flex-col">
             <h1 className="text-5xl font-bold text-center mb-10 text-white">
               Weather Forecast
             </h1>

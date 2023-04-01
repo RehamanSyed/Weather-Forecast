@@ -1,30 +1,14 @@
 import axios from "axios";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, BrowserRouter } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
+import useLocationBySearch from "../hook";
 const LocationSearch = () => {
   const inpRef = useRef();
   const [inpt, setInpt] = useState("");
   const [searchdata, setSearchData] = useState();
   const [searchInp, setSearchInp] = useState("");
-  const { isLoading, isError, data, error } = useQuery(
-    ["location", searchdata],
-    async () => {
-      const { data } = await axios.get(
-        `https://foreca-weather.p.rapidapi.com/location/search/${searchdata}`,
-        {
-          // params: { lang: "en", country: "in" },
-          headers: {
-            "X-RapidAPI-Key":
-              "31ad9c858dmsh0186b4bf1e5bfd6p16eb16jsn6a428054114a",
-            "X-RapidAPI-Host": "foreca-weather.p.rapidapi.com",
-          },
-        }
-      );
-      // console.log(data);
-      return data;
-    }
-  );
+  const { isLoading, isError, data, error } = useLocationBySearch(searchInp);
 
   // const submitHandler = (e) => {
   //   e.preventDefault();
@@ -35,10 +19,16 @@ const LocationSearch = () => {
     setSearchInp(value);
     setSearchData(value);
   };
-  console.log(data);
+
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
+
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data);
+  //   }
+  // }, [data]);
 
   return (
     <div className="max-h-screen top-0 left-0 right-0 bottom-0 flex justify-center items-center">

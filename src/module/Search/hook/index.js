@@ -1,22 +1,17 @@
+import { Fetcher } from "client";
 import { useQuery } from "react-query";
 
-export default function getLocationBySearch() {
+export default function useLocationBySearch(searchInp) {
+  console.log(searchInp);
   const { isLoading, isError, data, error } = useQuery(
-    ["location", inpt],
+    ["location", searchInp],
     async () => {
-      const { data } = await Fetcher.get(
-        `https://foreca-weather.p.rapidapi.com/location/search/${inpt}`,
-        {
-          // params: { lang: "en", country: "in" },
-          headers: {
-            "X-RapidAPI-Key":
-              "31ad9c858dmsh0186b4bf1e5bfd6p16eb16jsn6a428054114a",
-            "X-RapidAPI-Host": "foreca-weather.p.rapidapi.com",
-          },
-        }
+      const { isLoading, isError, data, error } = await Fetcher.get(
+        `location/search/${searchInp}`
       );
-      // console.log(data);
+      console.log(data);
       return data;
     }
   );
+  return { isLoading, isError, data, error };
 }

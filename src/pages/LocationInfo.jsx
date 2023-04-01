@@ -4,88 +4,19 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import Tabs from "../shared/Tabs/Tabs";
 import bgImg from "images/homebg.jpg";
+import { useCurrentWeather } from "module/LocationInfo/hook";
 const LocationInfo = () => {
   const { id } = useParams();
   const inpRef = useRef();
   const queryClient = useQueryClient();
   const [searchInp, setSearchInp] = useState();
-  const { mutate } = useMutation(["searchlocation"], async () => {
-    const response = await axios.get(
-      `https://foreca-weather.p.rapidapi.com/location/search/100110336`,
-      {
-        headers: {
-          "X-RapidAPI-Key":
-            "31ad9c858dmsh0186b4bf1e5bfd6p16eb16jsn6a428054114a",
-          "X-RapidAPI-Host": "foreca-weather.p.rapidapi.com",
-        },
-      }
-    );
-  });
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setSearchInp(inpRef.current.value);
-    console.log("search inpt", searchInp);
-  };
-  const getLocationInfo = async () => {
-    const { data } = await axios.get(
-      `https://foreca-weather.p.rapidapi.com/location/search/${id}`,
-      {
-        headers: {
-          "X-RapidAPI-Key":
-            "31ad9c858dmsh0186b4bf1e5bfd6p16eb16jsn6a428054114a",
-          "X-RapidAPI-Host": "foreca-weather.p.rapidapi.com",
-        },
-      }
-    );
-    return data;
-  };
-  const { isLoading, data, error, refetch } = useQuery(
-    ["getLocationInfo"],
-    getLocationInfo
-  );
-  // console.log("data", data);
-  const getWeatherStations = async () => {
-    const { data } = await axios.get(
-      `https://foreca-weather.p.rapidapi.com/observation/latest/${id}`,
-      {
-        headers: {
-          "X-RapidAPI-Key":
-            "31ad9c858dmsh0186b4bf1e5bfd6p16eb16jsn6a428054114a",
-          "X-RapidAPI-Host": "foreca-weather.p.rapidapi.com",
-        },
-      }
-    );
-    return data;
-  };
-  const { isLoading: loading, data: stationData } = useQuery(
-    ["getWeatherStations"],
-    getWeatherStations
-  );
-
-  const getCurrentWeather = async () => {
-    const { data } = await axios.get(
-      `https://foreca-weather.p.rapidapi.com/current/${id}`,
-      {
-        headers: {
-          "X-RapidAPI-Key":
-            "31ad9c858dmsh0186b4bf1e5bfd6p16eb16jsn6a428054114a",
-          "X-RapidAPI-Host": "foreca-weather.p.rapidapi.com",
-        },
-      }
-    );
-    return data;
-  };
-  const { isLoading: Currentloading, data: currentWeatherData } = useQuery(
-    ["getCurrentWeather"],
-    getCurrentWeather
-  );
-
-  useEffect(() => {
-    if (currentWeatherData) {
-      console.log("current weather", currentWeatherData);
-    }
-  }, [currentWeatherData]);
+  const {
+    isLoading,
+    isError,
+    data: currentWeatherData,
+    error,
+  } = useCurrentWeather(id);
 
   return (
     <main class="flex h-screen justify-center items-center flex-col">
@@ -97,8 +28,8 @@ const LocationInfo = () => {
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-2">
               <div className="shadow-lg rounded-lg p-5 w-full text-white">
-                <h1 className=" text-3xl font-bold">{data?.name}</h1>
-                <h3>{data?.country}</h3>
+                {/* <h1 className=" text-3xl font-bold">{data?.name}</h1> */}
+                {/* <h3>{data?.country}</h3> */}
                 <h1>
                   Feel like: {currentWeatherData?.current?.feelsLikeTemp} O F
                 </h1>
@@ -115,7 +46,7 @@ const LocationInfo = () => {
               <div className="text-white">
                 <img
                   src={`https://developer.foreca.com/static/images/symbols/${currentWeatherData?.current?.symbol}.png`}
-                  alt="image"
+                  alt="imagess"
                   width="50px"
                   height="50px"
                 />
