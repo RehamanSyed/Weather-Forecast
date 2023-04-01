@@ -37,6 +37,7 @@ const Tabs = () => {
     ["getDailyForecast"],
     getDailyForecast
   );
+  console.log("daily data", DailyForecastData);
   const getHourlyForecast = async () => {
     const { data } = await axios.get(
       `https://foreca-weather.p.rapidapi.com/forecast/hourly/${paramid}`,
@@ -97,12 +98,12 @@ const Tabs = () => {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
-        <TabNavItems
+        {/* <TabNavItems
           title="3 Hours Forecast"
           id={"threehours"}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-        />
+        /> */}
         {/* <TabNavItems
           title="Hour"
           id={"hour"}
@@ -119,9 +120,9 @@ const Tabs = () => {
       <TabContent id={"daily"} activeTab={activeTab}>
         <Daily DailyForecastData={DailyForecastData} />
       </TabContent>
-      <TabContent id={"threehours"} activeTab={activeTab}>
+      {/* <TabContent id={"threehours"} activeTab={activeTab}>
         <ThreeHours ThreeHourlyForecastData={ThreeHourlyForecastData} />
-      </TabContent>
+      </TabContent> */}
       {/* <TabContent id={"hour"} activeTab={activeTab}>
         <Hourly hourlyForecastData={hourlyForecastData} />
       </TabContent>
