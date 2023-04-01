@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Daily from "../../components/LocationInfo/Daily";
+import Daily from "../../module/LocationInfo/components/Daily";
 import TabContent from "./TabContent";
 import TabNavItems from "./TabNavItems";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import ThreeHours from "../../components/LocationInfo/ThreeHours";
+import ThreeHours from "../../module/LocationInfo/components/ThreeHours";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("daily");

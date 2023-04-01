@@ -1,5 +1,5 @@
 import React from "react";
-import LocationSearch from "../components/LocationSearch";
+import LocationSearch from "../module/Search/components/LocationSearch";
 
 const Home = () => {
   return (
