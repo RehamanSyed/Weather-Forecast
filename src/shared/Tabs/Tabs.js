@@ -5,7 +5,7 @@ import TabNavItems from "./TabNavItems";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import ThreeHours from "../../module/LocationInfo/components/ThreeHours";
+// import ThreeHours from "../../module/LocationInfo/components/ThreeHours";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("daily");
@@ -38,6 +38,7 @@ const Tabs = () => {
     getDailyForecast
   );
   console.log("daily data", DailyForecastData);
+
   const getHourlyForecast = async () => {
     const { data } = await axios.get(
       `https://foreca-weather.p.rapidapi.com/forecast/hourly/${paramid}`,
@@ -60,6 +61,7 @@ const Tabs = () => {
     );
     return data;
   };
+
   const { isLoading: hourlyloading, data: hourlyForecastData } = useQuery(
     ["getHourlyForecast"],
     getHourlyForecast

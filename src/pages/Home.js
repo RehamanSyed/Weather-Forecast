@@ -19,12 +19,14 @@ const Home = () => {
           className="w-full h-screen bg-cover bg-center"
           style={{ backgroundImage: `url(${bgImg})` }}
         >
-          <div className="h-screen flex justify-center items-center backdrop-brightness-50 flex-col">
-            <h1 className="text-5xl font-bold text-center mb-10 text-white">
-              Weather Forecast
-            </h1>
-            <div className="container mx-auto w-[75%]">
-              <LocationSearch />
+          <div className="w-full h-screen backdrop-brightness-50">
+            <div className="flex justify-center items-center  flex-col">
+              <h1 className="text-5xl font-bold text-center mb-10 text-white">
+                Weather Forecast
+              </h1>
+              <div className="container mx-auto w-[75%]">
+                <LocationSearch />
+              </div>
             </div>
           </div>
         </div>
